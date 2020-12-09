@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
+    <title>{{env('APP_NAME')}}</title>
 
     <script src="/dropzone/dropzone.min.js"></script>
     <link rel="stylesheet" href="/dropzone/basic.min.css">
