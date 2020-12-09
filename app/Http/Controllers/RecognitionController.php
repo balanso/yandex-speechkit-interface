@@ -20,6 +20,17 @@ class RecognitionController extends Controller
 		$rec->removeFile();
 	}
 
+	public function cleanHistory()
+	{
+		$recognitions = Recognition::where('status', '=', Recognition::STATUS_PROCESSED)->get();
+
+		$recognitions->each(function($r) {
+			$r->delete();
+		});
+
+		return redirect()->route('index');
+	}
+
 	public function downloadText(Recognition $rec)
 	{
 		$headers = array(

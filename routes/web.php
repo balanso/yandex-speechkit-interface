@@ -23,9 +23,11 @@ Auth::routes([
 ]);
 
 Route::middleware('auth')->group(function() {
-	Route::get('/', [RecognitionController::class, 'index']);
+	Route::get('/', [RecognitionController::class, 'index'])->name('index');
 	Route::get('/remove-file/{rec}', [RecognitionController::class, 'removeFile']);
 	Route::get('/download-text/{rec}', [RecognitionController::class, 'downloadText'])->name('download-text');
+
+	Route::get('/clean-history', [RecognitionController::class, 'cleanHistory'])->name('clean-history');
 
 	Route::post('/upload', [UploadController::class, 'uploadAudio']);
 

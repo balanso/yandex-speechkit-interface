@@ -33,8 +33,10 @@
         <a href="{{route('download-text', $rec->id)}}">Скачать</a>
         @endif
     @endforeach
-@endif
+    <hr>
+    <a href="{{route('clean-history')}}">Очистить историю завершённых обработок</a>
 
+@endif
 <script src="/dropzone/init.js"></script>
 </body>
 </html>
