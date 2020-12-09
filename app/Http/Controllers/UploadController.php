@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
+
 	public function uploadAudio(uploadAudioRequest $request)
 	{
 		$file = $request->file('file');
