@@ -14,6 +14,7 @@ class Recognition extends Model
 	const STATUS_UPLOADED = 2;
 	const STATUS_PROCESSING = 3;
 	const STATUS_PROCESSED = 4;
+	const STATUS_ERROR = 9;
 
 	protected $fillable = [
 		'name',
@@ -33,6 +34,8 @@ class Recognition extends Model
 				return 'Файл обрабатывается';
 			case self::STATUS_PROCESSED:
 				return 'Обработка завершена';
+			case self::STATUS_ERROR:
+				return 'Ошибка обработки: ' . $this->text;
 			default:
 				return 'Неизвестен';
 		}
