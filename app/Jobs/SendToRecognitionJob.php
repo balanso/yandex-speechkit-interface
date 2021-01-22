@@ -13,19 +13,19 @@ use Illuminate\Queue\SerializesModels;
 
 class SendToRecognitionJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $rec;
+	protected $rec;
 
 	/**
 	 * Create a new job instance.
 	 *
 	 * @param Recognition $rec
 	 */
-    public function __construct(Recognition $rec)
-    {
-        $this->rec = $rec;
-    }
+	public function __construct(Recognition $rec)
+	{
+		$this->rec = $rec;
+	}
 
 	/**
 	 * Execute the job.
@@ -33,8 +33,18 @@ class SendToRecognitionJob implements ShouldQueue
 	 * @return void
 	 * @throws \Exception
 	 */
-    public function handle()
-    {
-        Speechkit::tryRecognite($this->rec);
-    }
+	public function handle()
+	{
+		Speechkit::tryRecognite($this->rec);
+	}
+
+	public function failed($exception)
+	{
+		$this->rec->update([
+			'status' => Recognition::STATUS_ERROR,
+			'text'   => $exception->getMessage(),
+		]);
+
+		$this->rec->removeFile();
+	}
 }

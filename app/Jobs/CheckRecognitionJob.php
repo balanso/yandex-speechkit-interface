@@ -55,4 +55,14 @@ class CheckRecognitionJob implements ShouldQueue
 			$this->rec->removeFile();
 		}
 	}
+
+	public function failed($exception)
+	{
+		$this->rec->update([
+			'status' => Recognition::STATUS_ERROR,
+			'text'   => $exception->getMessage(),
+		]);
+
+		$this->rec->removeFile();
+	}
 }

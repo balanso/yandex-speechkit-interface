@@ -41,4 +41,15 @@ class UploadToCloudJob implements ShouldQueue
 		Storage::disk('yandex')->putFileAs('', $file, $fileName);
 		$this->rec->update(['status' => Recognition::STATUS_UPLOADED]);
 	}
+
+	public function failed($exception)
+	{
+		$this->rec->update([
+			'status' => Recognition::STATUS_ERROR,
+			'text'   => $exception->getMessage(),
+		]);
+
+		$this->rec->removeFile();
+	}
+
 }
