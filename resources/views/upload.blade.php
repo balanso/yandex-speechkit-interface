@@ -37,6 +37,6 @@
     <a href="{{route('clean-history')}}">Очистить историю завершённых обработок</a>
 
 @endif
-<script src="/dropzone/init.js?v=1"></script>
+<script src="/dropzone/init.js?v=2"></script>
 </body>
 </html>
