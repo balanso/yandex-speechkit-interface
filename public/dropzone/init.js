@@ -6,5 +6,5 @@ var dropzone = new Dropzone("form#audio-uploader", {
 	success: (file, response) => {
 		console.log(file, response)
 	},
-  acceptedFiles: '.ogg',
+  acceptedFiles: '.ogg,.opus',
 })

@@ -22,9 +22,14 @@ class RecognitionController extends Controller
 
 	public function cleanHistory()
 	{
-		$recognitions = Recognition::where('status', '=', Recognition::STATUS_PROCESSED)->get();
+		$allowedStatus = [
+			Recognition::STATUS_PROCESSED,
+			Recognition::STATUS_ERROR
+		];
 
-		$recognitions->each(function($r) {
+		$recognitions = Recognition::whereIn('status', $allowedStatus)->get();
+
+		$recognitions->each(function ($r) {
 			$r->delete();
 		});
 

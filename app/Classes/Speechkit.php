@@ -25,7 +25,7 @@ class Speechkit
 					'sampleRateHertz' => '48000, 16000, 8000,
 					'audioChannelCount' => '1'
 					*/
-					'rawResults'      => false,
+					'rawResults'      => true,
 				]
 			],
 			'audio'  => [
