@@ -6,6 +6,7 @@ namespace App\Classes;
 
 use App\Models\Recognition;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class Speechkit
 {
@@ -33,8 +34,11 @@ class Speechkit
 			]
 		];
 
+		$uuid = uniqid();
 		$response = Http::withHeaders([
 			'Authorization' => 'Api-Key ' . env('YANDEX_API_KEY'),
+            'x-client-request-id' => $uuid,
+            'x-data-logging-enabled' => true,
 		])->post('https://transcribe.api.cloud.yandex.net/speech/stt/v2/longRunningRecognize',
 			$data);
 

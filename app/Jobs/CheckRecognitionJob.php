@@ -46,9 +46,14 @@ class CheckRecognitionJob implements ShouldQueue
 				$text = Speechkit::getRecognitedText($data['response']['chunks']);
 				$this->rec->update(['text' => $text, 'status' => Recognition::STATUS_PROCESSED]);
 			} elseif (isset($data['error'])) {
+			    $code = $data['error']['code'] ?? '';
+			    $error = $data['error']['message'] ?? '';
+
+			    $message = "$error, код $code";
+
 				$this->rec->update([
 					'status' => Recognition::STATUS_ERROR,
-					'text'   => $data['error']['message'] ?: '',
+					'text'   => $message,
 				]);
 			}
 
